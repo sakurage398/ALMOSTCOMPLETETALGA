@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Qr Scanning</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <link rel="stylesheet" href="CSS/admin-scanner.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo-container">
+                    <span class="title">Automated Library Attendance Monitoring System</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="admin-menu">
+                        <span>ADMIN</span>
+                        <i class="fa-solid fa-caret-down"></i>
+                        <div class="dropdown">
+                            <button class="logout-btn">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <aside class="sidebar col-md-3 col-lg-2 d-md-block">
+                <div class="d-flex flex-column">
+                    <a href="admin-dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    <a href="admin-register.html" class="menu-item"><i class="fa-solid fa-qrcode"></i> Registration</a>
+                    <a href="admin-scanner.html" class="menu-item active"><i class="fa-solid fa-expand"></i> Scanner</a>
+                    <a href="admin-students_attendance.html" class="menu-item"><i class="fa-solid fa-clipboard"></i> Attendances</a>
+                    <a href="admin-student_perinfo.html" class="menu-item"><i class="fa-solid fa-user"></i> Personal Information</a>
+                    <a href="admin-user.html" class="menu-item"><i class="fa-solid fa-user-gear"></i> User Management</a>
+                </div>
+            </aside>
+
+            <main class="col-md-9 col-lg-10 dashboard">
+                <div class="scanner-container">
+                    <h2>Scan QR Code</h2>
+                    <div class="scanner-content">
+                        <div class="camera-section">
+                            <video id="video" autoplay playsinline muted></video>
+                            <canvas id="canvas" class="hidden"></canvas>
+                            <div class="scan-status mt-3">
+                                <p id="scan-result" class="mb-1">Waiting for QR code...</p>
+                                <p id="scan-details" class="small text-muted"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="user-info-side">
+                            <h3>Scan Result</h3>
+                            
+                            <!-- User display area -->
+                            <div class="user-display-content" id="user-display">
+                                <div class="scan-prompt text-center text-muted" id="scan-prompt">
+                                    <i class="fa-solid fa-qrcode fa-4x mb-3"></i>
+                                    <h4>Scan a QR code to view details</h4>
+                                </div>
+                                
+                                <div class="user-details-section hidden" id="user-details-section">
+                                    <div class="profile-section">
+                                        <img id="profile-picture" class="profile-picture" src="" alt="Profile Picture">
+                                        <div class="no-picture" id="no-picture">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                        <div class="profile-info">
+                                            <h4 id="user-name"></h4>
+                                            <p id="user-id"></p>
+                                            <div class="status-badge-container">
+                                                <span id="user-status" class="status-badge"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="user-info mb-3">
+                                        <p><strong>Department:</strong> <span id="user-department"></span></p>
+                                        <p><strong>Program:</strong> <span id="user-program"></span></p>
+                                    </div>
+                                    
+                                    <div class="attendance-section">
+                                        <h5>Recent Attendance</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Time In</th>
+                                                        <th>Time Out</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="attendance-data">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recently Scanned section - MOVED COMPLETELY OUTSIDE -->
+                            <div class="recently-scanned">
+                                <h5>Recently Scanned</h5>
+                                <div class="scanned-users" id="scanned-users">
+                                    <!-- Scanned user avatars will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <p>Do you want to log out?</p>
+            <div class="modal-buttons">
+                <button class="yes-btn">Yes</button>
+                <button class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+<script src="JS/admin-scanner.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

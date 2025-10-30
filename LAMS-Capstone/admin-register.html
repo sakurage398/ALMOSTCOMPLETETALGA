@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <link rel="stylesheet" href="CSS/admin-register.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo-container">
+                    <span class="title">Automated Library Attendance Monitoring System</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="admin-menu">
+                        <span>ADMIN</span>
+                        <i class="fa-solid fa-caret-down"></i>
+                        <div class="dropdown">
+                            <button class="logout-btn">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <aside class="sidebar col-md-3 col-lg-2 d-md-block">
+                <div class="d-flex flex-column">
+                    <a href="admin-dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    <a href="admin-register.html" class="menu-item active"><i class="fa-solid fa-qrcode"></i> Registration</a>
+                    <a href="admin-scanner.html" class="menu-item"><i class="fa-solid fa-expand"></i> Scanner</a>
+                    <a href="admin-students_attendance.html" class="menu-item"><i class="fa-solid fa-clipboard"></i> Attendances</a>
+                    <a href="admin-student_perinfo.html" class="menu-item"><i class="fa-solid fa-user"></i> Personal Information</a>
+                    <a href="admin-user.html" class="menu-item"><i class="fa-solid fa-user-gear"></i> User Management</a>
+                </div>
+            </aside>
+
+            <main class="col-md-9 col-lg-10 dashboard">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" id="search-input" class="search-input" placeholder="Enter Student/Faculty/Staff ID..." />
+                        <button id="search-button" class="search-button">
+                            <i class="fa-solid fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scanner-container">
+                    <h2>Register QR Code</h2>
+                    <div class="scanner-content">
+                        <video id="video" autoplay playsinline muted></video>
+                        <canvas id="canvas" class="hidden"></canvas>
+                        <div class="user-info-side">
+                            <h3>Scan/Search Result</h3>
+                            <div class="user-info-side-content" id="user-info-side">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-user fa-3x mb-3"></i>
+                                    <p>Search for a person to display information here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <p>Do you want to log out?</p>
+            <div class="modal-buttons">
+                <button class="yes-btn">Yes</button>
+                <button class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+<script src="JS/admin-register.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

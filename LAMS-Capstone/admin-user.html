@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/admin-user.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo-container">
+                    <span class="title">Automated Library Attendance Monitoring System</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="admin-menu">
+                        <span>ADMIN</span>
+                        <i class="fa-solid fa-caret-down"></i>
+                        <div class="dropdown">
+                            <button class="logout-btn">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="sidebar col-md-3 col-lg-2 d-md-block">
+                <div class="d-flex flex-column">
+                    <a href="admin-dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    <a href="admin-register.html" class="menu-item"><i class="fa-solid fa-qrcode"></i> Registration</a>
+                    <a href="admin-scanner.html" class="menu-item"><i class="fa-solid fa-expand"></i> Scanner</a>
+                    <a href="admin-students_attendance.html" class="menu-item"><i class="fa-solid fa-clipboard"></i> Attendances</a>
+                    <a href="admin-student_perinfo.html" class="menu-item"><i class="fa-solid fa-user"></i> Personal Information</a>
+                    <a href="admin-user.html" class="menu-item active"><i class="fa-solid fa-user-gear"></i> User Management</a>
+                </div>
+            </aside>
+
+            <main class="col-md-9 col-lg-10 p-4">
+                <h2 class="mb-4">User Management</h2>
+                
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="admin-tab">Admin Users</button>
+                        <button class="tab" data-tab="audit-tab">Audit Trail</button>
+                    </div>
+                    
+                    <div id="admin-tab" class="tab-content active">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input type="text" class="form-control form-control-sm" placeholder="Search admin users..." style="width: 200px;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-end">
+                                        <button class="btn btn-primary btn-sm" id="add-admin-btn">
+                                            <i class="fa-solid fa-plus"></i> Add Admin
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="table-container">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Role</th>
+                                                <th>Username</th>
+                                                <th>Email</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-users-body">
+                                            <tr class="empty-message">
+                                                <td colspan="5" class="text-center">No records found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="audit-tab" class="tab-content">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input type="text" class="form-control form-control-sm" placeholder="Search users..." style="width: 200px;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-end">
+                                        <button class="btn btn-secondary btn-sm">
+                                            <i class="fa-solid fa-rotate"></i> Refresh
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="table-container">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>User ID</th>
+                                                <th>Username</th>
+                                                <th>Name</th>
+                                                <th>Role</th>
+                                                <th>Email</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="audit-users-body">
+                                            <tr class="empty-message">
+                                                <td colspan="6" class="text-center">No records found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal" id="logout-modal">
+        <div class="modal-content">
+            <p>Do you want to log out?</p>
+            <div class="modal-buttons">
+                <button class="yes-btn">Yes</button>
+                <button class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-user-modal" id="add-user-modal">
+        <div class="add-user-form">
+            <div class="form-header">
+                <div class="form-title">Add Admin User</div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="add-user-form">
+                <div class="form-group">
+                    <label for="user-name">Name:</label>
+                    <input type="text" id="user-name" class="form-control" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-role-display">Role:</label>
+                    <div class="form-control-plaintext" id="user-role-display">Admin</div>
+                </div>
+                <div class="form-group">
+                    <label for="user-username">Username:</label>
+                    <input type="text" id="user-username" class="form-control" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email:</label>
+                    <input type="email" id="user-email" class="form-control" placeholder="Enter email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-password">Password:</label>
+                    <input type="password" id="user-password" class="form-control" placeholder="Enter password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn btn btn-secondary">Cancel</button>
+                    <button type="button" class="save-btn btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="user-activities-modal">
+        <div class="activities-modal-content">
+            <div class="modal-header">
+                <h3>User Activities: <span id="selected-username"></span></h3>
+                <button class="close-activities-btn">&times;</button>
+            </div>
+            <div class="activities-search-container">
+                <select class="form-control action-filter">
+                    <option value="">All Actions</option>
+                    <option value="USER_CREATE">User Created</option>
+                    <option value="USER_UPDATE">User Updated</option>
+                    <option value="USER_DELETE">User Deleted</option>
+                    <option value="DASHBOARD_ACCESS">Dashboard Access</option>
+                    <option value="VIEW_LOGS_HISTORY">View System Logs</option>
+                    <option value="ATTENDANCE_ACCESS">Attendance Access</option>
+                    <option value="GENERATE_REPORT">Generate Report</option>
+                    <option value="SEARCH_ATTENDANCE">Search Attendance</option>
+                    <option value="SWITCH_TAB">Switch Tab</option>
+                    <option value="PERSONAL_INFO_ACCESS">Personal Info Access</option>
+                    <option value="EDIT_STUDENT_INFO">Edit Student Info</option>
+                    <option value="EDIT_FACULTY_INFO">Edit Faculty Info</option>
+                    <option value="EDIT_STAFF_INFO">Edit Staff Info</option>
+                    <option value="SEARCH_PERSONAL_INFO">Search Personal Info</option>
+                    <option value="ADD_FILE_STUDENT">Add File Student</option>
+                    <option value="ADD_FILE_FACULTY">Add File Faculty</option>
+                    <option value="ADD_FILE_STAFF">Add File Staff</option>
+                    <option value="ADD_STUDENT">Add Student</option>
+                    <option value="ADD_FACULTY">Add Faculty</option>
+                    <option value="ADD_STAFF">Add Staff</option>
+                    <option value="REGISTRATION_ACCESS">Registration Access</option>
+                    <option value="SCANNER_ACCESS">Scanner Access</option>
+                </select>
+            </div>
+            <div class="activities-table-container">
+                <table class="table table-striped table-bordered activities-table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Action</th>
+                            <th>Description</th>
+                            <th>IP Address</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">No activities found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="activities-pagination">
+                <button class="btn btn-outline-secondary activities-prev-btn" disabled>Previous</button>
+                <span class="activities-page-info">Page 1 of 1</span>
+                <button class="btn btn-outline-secondary activities-next-btn" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="JS/admin-user.js"></script>
+</body>
+</html>

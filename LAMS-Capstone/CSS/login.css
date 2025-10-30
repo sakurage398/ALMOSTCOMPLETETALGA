@@ -1,0 +1,581 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('../img/library_bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 12px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    height: 70px;
+    margin-right: 15px;
+}
+
+.header-title {
+    height: 90px;
+}
+
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    font-family: 'Jockey One', sans-serif;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.btn-login {
+    background-color: #3498db;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+    width: 100%;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.pincode-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1050;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.pincode-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pincode-title {
+    font-family: 'Jockey One', sans-serif;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pincode-subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 25px;
+}
+
+.pincode-input {
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    font-weight: bold;
+}
+
+.pincode-timer {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: 600;
+}
+
+.pincode-error {
+    text-align: center;
+    margin: 15px 0;
+    display: none;
+}
+
+.pincode-error.error {
+    color: #e74c3c;
+}
+
+.pincode-error.success {
+    color: #27ae60;
+}
+
+.pincode-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.pincode-btn {
+    flex: 1;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.pincode-btn.secondary {
+    background-color: #95a5a6;
+    border: none;
+    color: white;
+}
+
+.pincode-btn.secondary:hover {
+    background-color: #7f8c8d;
+}
+
+.pincode-btn.primary {
+    background-color: #3498db;
+    border: none;
+    color: white;
+}
+
+.pincode-btn.primary:hover {
+    background-color: #2980b9;
+}
+
+.nav-link {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    padding: 8px 15px !important;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+
+@media (max-width: 768px) {
+    .top-bar {
+        background-color: rgba(255, 255, 255, 1) !important;
+        padding: 8px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        border-bottom: 2px solid #3498db;
+    }
+    
+    .top-bar-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .header-logo, .header-title {
+        margin-bottom: 5px;
+        height: 60px;
+    }
+    
+    .login-container {
+        padding: 20px 15px;
+        margin: 10px;
+        max-width: 95%;
+        min-height: auto;
+        height: auto;
+        transform: scale(0.95);
+    }
+    
+    .pincode-container {
+        padding: 20px 15px;
+        margin: 10px;
+        max-width: 95%;
+        min-height: auto;
+    }
+    
+    .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+
+    .login-container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .nav-link {
+        text-align: center;
+        margin: 4px 0;
+        padding: 8px 12px !important;
+        font-size: 0.9rem;
+        border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+    
+    .nav-link:hover, .nav-link.active {
+        background-color: rgba(52, 152, 219, 0.2);
+        transform: none;
+    }
+    
+    .login-header {
+        margin-bottom: 20px;
+    }
+    
+    .login-header h2 {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+    }
+    
+    .login-header p {
+        font-size: 0.85rem;
+        line-height: 1.3;
+        margin-bottom: 0;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+    
+    .form-control {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        height: 42px;
+    }
+    
+    .btn-login {
+        padding: 10px;
+        font-size: 0.95rem;
+        margin-top: 5px;
+        height: 44px;
+    }
+    
+    .pincode-title {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+    
+    .pincode-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .error {
+        font-size: 0.75rem;
+        margin-top: 3px;
+    }
+}
+
+@media (max-width: 576px) {
+    .top-bar {
+        padding: 6px 0;
+    }
+    
+    .header-logo {
+        height: 45px;
+    }
+    
+    .header-title {
+        height: 55px;
+    }
+    
+    .login-container {
+        padding: 15px 12px;
+        margin: 8px;
+        max-width: 98%;
+        transform: scale(0.92);
+        border-radius: 10px;
+    }
+    
+    .pincode-container {
+        padding: 15px 12px;
+        margin: 8px;
+        max-width: 98%;
+        border-radius: 10px;
+    }
+    
+    .login-header h2 {
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+    }
+    
+    .login-header p {
+        font-size: 0.8rem;
+    }
+    
+    .form-control {
+        padding: 8px 10px;
+        height: 40px;
+        font-size: 0.85rem;
+    }
+    
+    .btn-login {
+        padding: 9px;
+        font-size: 0.9rem;
+        height: 42px;
+    }
+    
+    .pincode-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .pincode-btn {
+        padding: 9px;
+        font-size: 0.9rem;
+        height: 40px;
+    }
+    
+    .pincode-input {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        padding: 10px;
+        height: 45px;
+    }
+    
+    .pincode-timer {
+        font-size: 0.85rem;
+        margin: 12px 0;
+    }
+    
+    
+    .navbar-toggler {
+    border: 2px solid #3498db !important;
+    padding: 6px 10px !important;
+    border-radius: 5px !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2852, 152, 219, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    width: 20px;
+    height: 20px;
+}
+    .nav-link {
+        padding: 6px 10px !important;
+        font-size: 0.85rem;
+        margin: 2px 0;
+    }
+    
+    .navbar-collapse {
+        padding: 6px;
+        margin-top: 8px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media (max-width: 400px) {
+    .top-bar {
+        padding: 4px 0;
+    }
+    
+    .header-logo {
+        height: 40px;
+    }
+    
+    .header-title {
+        height: 45px;
+    }
+    
+    .login-container {
+        padding: 12px 10px;
+        margin: 5px;
+        transform: scale(0.9);
+        border-radius: 8px;
+    }
+    
+    .pincode-container {
+        padding: 12px 10px;
+        margin: 5px;
+        border-radius: 8px;
+    }
+    
+    .login-header h2 {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+    }
+    
+    .login-header p {
+        font-size: 0.75rem;
+    }
+    
+    .form-control {
+        padding: 6px 8px;
+        height: 38px;
+        font-size: 0.8rem;
+    }
+    
+    .btn-login {
+        padding: 8px;
+        font-size: 0.85rem;
+        height: 40px;
+    }
+    
+    .form-label {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    .error {
+        font-size: 0.7rem;
+    }
+    
+    .pincode-title {
+        font-size: 1.1rem;
+    }
+    
+    .pincode-subtitle {
+        font-size: 0.75rem;
+    }
+    
+    .pincode-input {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        padding: 8px;
+        height: 42px;
+    }
+    
+    .nav-link {
+        padding: 5px 8px !important;
+        font-size: 0.8rem;
+    }
+    
+    .navbar-collapse {
+        padding: 4px;
+        margin-top: 6px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+}
+
+
+
+.navbar {
+    background-color: rgba(255, 255, 255, 1) !important;
+    border-bottom: 3px solid #3498db;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+
+@media (max-height: 600px) {
+    .login-wrapper {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+    .header-logo {
+        height: 55px;
+    }
+    
+    .header-title {
+        height: 60px;
+    }
+    
+    .login-container {
+        transform: scale(0.85);
+        margin-top: 0;
+    }
+    
+    .login-header {
+        margin-bottom: 15px;
+    }
+    
+    .login-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+    
+    .form-control {
+        height: 38px;
+        padding: 8px 10px;
+    }
+    
+    .btn-login {
+        height: 40px;
+        padding: 8px;
+    }
+}

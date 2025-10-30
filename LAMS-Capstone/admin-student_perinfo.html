@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/admin-student_perinfo.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo-container">
+                    <span class="title">Automated Library Attendance Monitoring System</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="admin-menu">
+                        <span>ADMIN</span>
+                        <i class="fa-solid fa-caret-down"></i>
+                        <div class="dropdown">
+                            <button class="logout-btn">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="sidebar col-md-3 col-lg-2 d-md-block">
+                <div class="d-flex flex-column">
+                    <a href="admin-dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    <a href="admin-register.html" class="menu-item"><i class="fa-solid fa-qrcode"></i> Registration</a>
+                    <a href="admin-scanner.html" class="menu-item"><i class="fa-solid fa-expand"></i> Scanner</a>
+                    <a href="admin-students_attendance.html" class="menu-item"><i class="fa-solid fa-clipboard"></i> Attendances</a>
+                    <a href="admin-student_perinfo.html" class="menu-item active"><i class="fa-solid fa-user"></i> Personal Information</a>
+                    <a href="admin-user.html" class="menu-item"><i class="fa-solid fa-user-gear"></i> User Management</a>
+                </div>
+            </aside>
+
+            <main class="col-md-9 col-lg-10 p-4">
+                <div class="tabs-container">
+                    <a href="admin-student_perinfo.html" class="tab active">Student</a>
+                    <a href="admin-faculty_perinfo.html" class="tab">Faculty</a>
+                    <a href="admin-staff_perinfo.html" class="tab">Staff</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="mb-4">Student Information</h2>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center gap-2">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search students..." style="width: 200px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <button class="btn btn-secondary btn-sm me-2" id="add-file-btn">
+                                    <i class="fa-solid fa-file-import"></i> Add File
+                                </button>
+                                <button class="btn btn-primary btn-sm" id="add-student-btn">
+                                    <i class="fa-solid fa-plus"></i> Add Student
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Student Number</th>
+                                        <th>Picture</th>
+                                        <th>Pin Code</th>
+                                        <th>Name</th>
+                                        <th>Department
+                                            <select class="form-select form-select-sm mt-1" id="department-filter">
+                                                <option value="">All Departments</option>
+                                            </select>
+                                        </th>
+                                        <th>Program
+                                            <select class="form-select form-select-sm mt-1" id="program-filter">
+                                                <option value="">All Programs</option>
+                                            </select>
+                                        </th>
+                                        <th>Year
+                                            <select class="form-select form-select-sm mt-1" id="year-filter">
+                                                <option value="">All Years</option>
+                                            </select>
+                                        </th>
+                                        <th>Block
+                                            <select class="form-select form-select-sm mt-1" id="block-filter">
+                                                <option value="">All Blocks</option>
+                                            </select>
+                                        </th>
+                                        <th>Registration
+                                            <select class="form-select form-select-sm mt-1" id="registration-filter">
+                                                <option value="">All</option>
+                                                <option value="Registered">Registered</option>
+                                                <option value="Unregistered">Unregistered</option>
+                                            </select>
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="student-table-body">
+                                    <tr class="empty-message">
+                                        <td colspan="10" class="text-center">No records found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal" id="logout-modal">
+        <div class="modal-content">
+            <p>Do you want to log out?</p>
+            <div class="modal-buttons">
+                <button class="yes-btn">Yes</button>
+                <button class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-user-modal" id="add-user-modal">
+        <div class="add-user-form">
+            <div class="form-header">
+                <div class="form-title"><i class="fa-solid fa-plus"></i> Add Student Information</div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="add-student-form">
+                <div class="form-group">
+                    <label for="student-number">Student Number:</label>
+                    <input type="number" id="student-number" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-name">Name:</label>
+                    <input type="text" id="student-name" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-department">Department:</label>
+                    <select id="student-department" class="form-control" required>
+                        <option value="" disabled selected>Select Department</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-program">Program:</label>
+                    <select id="student-program" class="form-control" required>
+                        <option value="" disabled selected>Select Program</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-year">Year:</label>
+                    <select id="student-year" class="form-control" required>
+                        <option value="" disabled selected>Select Year</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-block">Block:</label>
+                    <select id="student-block" class="form-control" required>
+                        <option value="" disabled selected>Select Block</option>
+                    </select>
+                </div>
+                <div class="picture-upload-section">
+                    <label>Picture:</label>
+                    <div class="picture-preview" id="picture-preview">
+                        <i class="fa-solid fa-user picture-placeholder" id="picture-placeholder"></i>
+                    </div>
+                    <div class="picture-buttons">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('student-picture').click()">
+                            Choose Picture
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" id="remove-picture-btn">
+                            Remove Picture
+                        </button>
+                    </div>
+                    <input type="file" id="student-picture" accept="image/*" class="d-none">
+                </div>
+                
+                <div class="pin-code-section">
+                    <label class="mb-0">Pin Code:</label>
+                    <input type="text" class="pin-code-input form-control" id="student-pincode" placeholder="" readonly>
+                    <button type="button" class="generate-pin-btn btn btn-primary btn-sm" id="generate-pin-btn">
+                        <i class="fa-solid fa-refresh"></i>
+                        Generate PIN
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-registration" class="form-label">Registration Status:</label>
+                    <div class="form-control-plaintext" id="student-registration">Unregistered</div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn btn btn-secondary">Cancel</button>
+                    <button type="button" class="save-btn btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- File Upload Modal -->
+    <div class="file-upload-modal" id="file-upload-modal">
+        <div class="file-upload-form">
+            <div class="file-upload-header">
+                <div class="file-upload-title"><i class="fa-solid fa-file-import"></i> Student Personal Information</div>
+                <button class="close-upload-btn">&times;</button>
+            </div>
+            
+            <div class="file-upload-instructions">
+                <h4>File Requirements:</h4>
+                <ul>
+                    <li>File format: CSV only</li>
+                    <li>Required columns: Student Number, Name, Department, Program, Year, Block</li>
+                    <li>Optional columns: Pincode (6 digits)</li>
+                    <li>Maximum file size: 5MB</li>
+                    <li>First row should contain column headers</li>
+                    <li>Year format: "1st Year", "2nd Year", "3rd Year", "4th Year"</li>
+                    <li>Block format: "Block 1", "Block 2", etc.</li>
+                </ul>
+            </div>
+            
+            <div class="file-upload-area" id="file-upload-area">
+                <i class="fa-solid fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
+                <div class="file-upload-text">Click to upload or drag and drop</div>
+                <div class="file-upload-hint">CSV files only</div>
+                <input type="file" id="student-file" class="d-none" accept=".csv">
+            </div>
+            
+            <div class="upload-preview" id="upload-preview">
+                <h4>File Preview (First 5 rows):</h4>
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered" id="preview-table"></table>
+                </div>
+            </div>
+            
+            <div class="upload-actions">
+                <button class="cancel-upload-btn btn btn-secondary">Cancel</button>
+                <button class="upload-btn btn btn-primary" id="upload-btn" disabled>Upload File</button>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="JS/admin-student_perinfo.js"></script>
+</body>
+</html>

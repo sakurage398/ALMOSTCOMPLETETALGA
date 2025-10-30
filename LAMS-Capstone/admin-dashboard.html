@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/admin-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo-container">
+                    <span class="title">Automated Library Attendance Monitoring System</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="log-history-btn" id="logHistoryBtn">
+                        <i class="fas fa-history"></i> Log History
+                    </button>
+                    <div class="admin-menu">
+                        <span>ADMIN</span>
+                        <i class="fa-solid fa-caret-down"></i>
+                        <div class="dropdown">
+                            <button class="logout-btn">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="sidebar col-md-3 col-lg-2 d-md-block">
+                <div class="d-flex flex-column">
+                    <a href="admin-dashboard.html" class="menu-item active"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    <a href="admin-register.html" class="menu-item"><i class="fa-solid fa-qrcode"></i> Registration</a>
+                    <a href="admin-scanner.html" class="menu-item"><i class="fa-solid fa-expand"></i> Scanner</a>
+                    <a href="admin-students_attendance.html" class="menu-item"><i class="fa-solid fa-clipboard"></i> Attendances</a>
+                    <a href="admin-student_perinfo.html" class="menu-item"><i class="fa-solid fa-user"></i> Personal Information</a>
+                    <a href="admin-user.html" class="menu-item"><i class="fa-solid fa-user-gear"></i> User Management</a>
+                </div>
+            </aside>
+
+            <main class="col-md-9 col-lg-10 dashboard">
+                <div class="content-container">
+                    <h2 class="mb-4">Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card green">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <div class="stat-card-content">
+                                <p>Time-in</p>
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card red">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <div class="stat-card-content">
+                                <p>Time-out</p>
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card blue">
+                            <i class="fa-solid fa-user"></i>
+                            <div class="stat-card-content">
+                                <p>Students</p>
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card purple">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <div class="stat-card-content">
+                                <p>Faculty</p>
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="stat-card gray">
+                            <i class="fa-solid fa-users"></i>
+                            <div class="stat-card-content">
+                                <p>Staff</p>
+                                <span>0</span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <p>Do you want to log out?</p>
+            <div class="modal-buttons">
+                <button class="yes-btn">Yes</button>
+                <button class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="log-history-modal" id="logHistoryModal">
+        <div class="log-history-content">
+            <span class="close-log-history" id="closeLogHistory">&times;</span>
+            <h2 class="log-history-title">System Access Logs</h2>
+            <table class="log-history-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Date</th>
+                        <th>Login Time</th>
+                        <th>Logout Time</th>
+                    </tr>
+                </thead>
+                <tbody id="logHistoryTableBody">
+                    <!-- Log history data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="JS/admin-dashboard.js"></script>
+</body>
+</html>
